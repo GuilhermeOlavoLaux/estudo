@@ -90,6 +90,64 @@ describe("New user registration", () => {
       addNewUserForm.companiesInput.click();
       addNewUserForm.companiesInput.contains("Empresa 1").should("exist");
       cy.contains(".option", "Empresa 1").click();
+    });
+    it("They click the modal to close the dropdown menu", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.modal.click();
+    });
+
+    it("They select the Salvar button", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.saveButton.click();
+    });
+
+    it("It should be possible to view the registered user on the main page", () => {
+      cy.contains("Lucas Engelmann").should("exist");
+      cy.contains("lucas@email.com").should("exist");
+    });
+  });
+
+  describe("Successful User Registration", () => {
+    it("Successful User Registration with Multiple Companies", () => {
+      cy.visit("/");
+    });
+
+    it("And selects the +Novo Usuário button", () => {
+      const addNewUserForm = new AddNewUserForm();
+
+      addNewUserForm.addButton.click();
+    });
+
+    it("They fill in the Nome field with a valid name", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.typeName("Lucas Engelmann");
+    });
+
+    it("They fill in the E-mail field with a valid email", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.typeEmail("lucas@email.com");
+    });
+
+    it("They fill in the Telefone field with an area code and number", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.typeCellphone("51985696919");
+    });
+
+    it("They fill in the Data field with a valid date", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.typeDate("2000-01-01");
+    });
+
+    it("They select the desired company in the Empresas field", () => {
+      const addNewUserForm = new AddNewUserForm();
+      addNewUserForm.companiesInput.click();
+      addNewUserForm.companiesInput.contains("Empresa 1").should("exist");
+      addNewUserForm.companiesInput.contains("Empresa 2").should("exist");
+      cy.contains(".option", "Empresa 1").click();
+      cy.contains(".option", "Empresa 2").click();
+    });
+    it("They click the modal to close the dropdown menu", () => {
+      const addNewUserForm = new AddNewUserForm();
       addNewUserForm.modal.click();
     });
 
